@@ -59,8 +59,8 @@ export const approveDoctor = async (doctorId) => {
 
   return response.data;
 };
-export const searchDoctors = async (search) => {
-  const response = await API.get(`/admin/doctors/search?search=${search}`, {
+export const searchDoctors = async (keyword) => {
+  const response = await API.get(`/admin/doctors/search?keyword=${keyword}`, {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },
@@ -70,6 +70,46 @@ export const searchDoctors = async (search) => {
 };
 export const createDoctor = async (doctorData) => {
   const response = await API.post("/admin/create-doctor", doctorData, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+
+  return response.data;
+};
+
+export const getPendingDoctors = async () => {
+  const response = await API.get("/admin/pending-doctors", {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+
+  return response.data;
+};
+
+export const activateSubscription = async (activationData) => {
+  const response = await API.post("/admin/activate-subscription", activationData, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+
+  return response.data;
+};
+
+export const getRevenueReport = async () => {
+  const response = await API.get("/admin/revenue-report", {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+
+  return response.data;
+};
+
+export const approveRefund = async (refundId) => {
+  const response = await API.put(`/admin/refund/${refundId}`, {}, {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },

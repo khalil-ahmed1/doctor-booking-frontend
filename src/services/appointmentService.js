@@ -71,3 +71,20 @@ export const bookPremiumAppointment = async (doctorId, slotDate, slotTime) => {
 
   return response.data;
 };
+
+// Global Cancel Appointment
+export const cancelAppointmentGlobal = async (appointmentId, reason) => {
+  const token = localStorage.getItem("token");
+
+  const response = await API.put(
+    `/appointments/${appointmentId}/cancel`,
+    { reason },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  return response.data;
+};

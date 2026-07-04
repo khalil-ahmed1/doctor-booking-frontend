@@ -26,3 +26,15 @@ export const cancelAppointment = async (appointmentId) => {
 
   return response.data;
 };
+
+export const getPatientDashboard = async () => {
+  const token = localStorage.getItem("token");
+
+  const response = await API.get("/patients/dashboard", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+};

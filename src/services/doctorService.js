@@ -7,10 +7,10 @@ export const getDoctors = async () => {
 };
 
 // Search doctors
-export const searchDoctors = async (specialization = "") => {
+export const searchDoctors = async (keyword = "") => {
   const response = await API.get("/doctors/search", {
     params: {
-      specialization,
+      keyword,
     },
   });
 
@@ -37,6 +37,18 @@ export const getHomeVisitSlots = async (doctorId, date) => {
   const response = await API.get(
     `/doctors/${doctorId}/home-slots?date=${date}`,
   );
+
+  return response.data;
+};
+
+export const updatePremiumSchedule = async (doctorId, scheduleData) => {
+  const token = localStorage.getItem("token");
+
+  const response = await API.put(`/doctors/${doctorId}/premium-schedule`, scheduleData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   return response.data;
 };
